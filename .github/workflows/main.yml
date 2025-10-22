@@ -1,0 +1,17 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build with Buildozer
+      uses: ugorji/buildozer-action@v1
+      with:
+        work-dir: .
+        buildozer-version: stable
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: quantum-os-apk
+        path: bin/*.apk
